@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -15,19 +16,25 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
-	@GetMapping("/")
-	public String rootEndpoint() {
-		String message = "Hello, World!";
-		return message;
-	}
+	// code updated according to the lab04 instructions
+	// @GetMapping("/greet")
+	// public String rootEndpoint() {
+	// 	String message = "Welcome to Spring Boot!";
+	// 	return message;
+	// }
 	
 
-	 // Modified '/hello' endpoint to accept a query parameter 'name'
-	 String name = "Amith";
-	 @GetMapping("/hello")
-	 public String helloEndpoint(@RequestParam(name = "name", defaultValue = "Guest") String name) {
-		 return "Hello, " + name + "!";
+	
+    // Personalized greeting using a path variable
+    // @GetMapping("/greet/{name}")
+    // public String pathVariableGreeting(@PathVariable String name) {
+    //     return "Hello, " + name + "! Welcome to Spring Boot!";
+    // }
+
+	 // Personalized greeting using a path variable
+	 @GetMapping("/greet/{name}")
+	 public String pathVariableGreeting(@PathVariable String name, 
+										@RequestParam(name = "message", required = false) String message) {
+			 return "Hello " + name + "! " + message;	
 	 }
-	
-
-}
+ }
